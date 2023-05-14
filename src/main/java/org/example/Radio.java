@@ -1,8 +1,17 @@
 package org.example;
 
 public class Radio {
-    private int currentStation;
     private int volume;
+    private int currentStation;
+    private int numberStation = 10;
+
+    public Radio() {
+
+    }
+
+    public Radio(int numberStation) {
+        this.numberStation = numberStation;
+    }
 
 
     public int getVolume() {
@@ -36,8 +45,9 @@ public class Radio {
         return currentStation;
     }
 
+
     public void setStation(int newCurrentStation) {
-        if (newCurrentStation > 9) {
+        if (newCurrentStation > numberStation - 1) {
             return;
         }
         if (newCurrentStation < 0) {
@@ -47,7 +57,7 @@ public class Radio {
     }
 
     public void nextStation() {
-        if (currentStation == 9) {
+        if (currentStation == numberStation - 1) {
             setStation(0);
         } else {
             currentStation++;
@@ -56,7 +66,7 @@ public class Radio {
 
     public void prevStation() {
         if (currentStation == 0) {
-            setStation(9);
+            setStation(numberStation - 1);
         } else {
             currentStation--;
         }

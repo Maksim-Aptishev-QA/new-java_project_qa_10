@@ -4,180 +4,137 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class RadioTest {
+
     @Test
-    public void shouldSetVolume() {
-        Radio service = new Radio();
-
-        service.setVolume(100);
-        service.plusVolume();
-
-        int expected = 100;
-        int actual = service.getVolume();
-
-        Assertions.assertEquals(expected, actual);
+    public void SetVolume() {
+        Radio radio = new Radio();
+        radio.setVolume(100);
+        radio.plusVolume();
+        Assertions.assertEquals(100, radio.getVolume());
     }
 
     @Test
-    public void shouldSetVolume1() {
-        Radio service = new Radio();
-
-        service.setVolume(1);
-
-        int expected = 1;
-        int actual = service.getVolume();
-
-        Assertions.assertEquals(expected, actual);
+    public void SetVolume1() {
+        Radio radio = new Radio();
+        radio.setVolume(1);
+        Assertions.assertEquals(1, radio.getVolume());
     }
 
     @Test
-    public void shouldPlusSetVolume() {
-        Radio service = new Radio();
-
-        service.setVolume(99);
-        service.plusVolume();
-
-        int expected = 100;
-        int actual = service.getVolume();
-
-        Assertions.assertEquals(expected, actual);
+    public void PlusSetVolume() {
+        Radio radio = new Radio();
+        radio.setVolume(99);
+        radio.plusVolume();
+        Assertions.assertEquals(100, radio.getVolume());
     }
 
     @Test
-    public void shouldMinusSetVolume() {
-        Radio service = new Radio();
+    public void MinusSetVolume() {
+        Radio radio = new Radio();
+        radio.setVolume(0);
+        radio.minusVolume();
+        Assertions.assertEquals(0, radio.getVolume());
+    }
 
-        service.setVolume(0);
-        service.minusVolume();
+    @Test
+    public void MinusSetVolume1() {
+        Radio radio = new Radio();
+        radio.setVolume(60);
+        radio.minusVolume();
+        Assertions.assertEquals(59, radio.getVolume());
+    }
 
-        int expected = 0;
-        int actual = service.getVolume();
+    @Test
+    public void NegativitySetVolume() {
+        Radio radio = new Radio();
+        radio.setVolume(1000);
+        Assertions.assertEquals(0, radio.getVolume());
+    }
 
-        Assertions.assertEquals(expected, actual);
+    @Test
+    public void NegativitySetVolume1() {
+        Radio radio = new Radio();
+        radio.setVolume(-1);
+        Assertions.assertEquals(0, radio.getVolume());
+    }
+
+    @Test
+    public void nextStation1() {
+        Radio radio = new Radio();
+        radio.setStation(9);
+        radio.nextStation();
+        Assertions.assertEquals(0, radio.getCurrentStation());
 
     }
 
     @Test
-    public void shouldMinusSetVolume1() {
-        Radio service = new Radio();
-
-        service.setVolume(50);
-        service.minusVolume();
-
-        int expected = 49;
-        int actual = service.getVolume();
-
-        Assertions.assertEquals(expected, actual);
+    public void nextStation2() {
+        Radio radio = new Radio();
+        radio.setStation(1);
+        radio.nextStation();
+        Assertions.assertEquals(2, radio.getCurrentStation());
     }
 
     @Test
-    public void shouldSetStation() {
-        Radio service = new Radio();
-
-        service.setStation(5);
-
-        int expected = 5;
-        int actual = service.getCurrentStation();
-
-        Assertions.assertEquals(expected, actual);
+    public void prevStation1() {
+        Radio radio = new Radio();
+        radio.setStation(0);
+        radio.prevStation();
+        Assertions.assertEquals(9, radio.getCurrentStation());
     }
 
     @Test
-    public void shouldNextStation1() {
-        Radio service = new Radio();
-
-        service.setStation(9);
-        service.nextStation();
-
-        int expected = 0;
-        int actual = service.getCurrentStation();
-
-        Assertions.assertEquals(expected, actual);
+    public void prevStation0() {
+        Radio radio = new Radio();
+        radio.setStation(3);
+        radio.prevStation();
+        Assertions.assertEquals(2, radio.getCurrentStation());
     }
 
     @Test
-    public void shouldNextStation2() {
-        Radio service = new Radio();
-
-        service.setStation(1);
-        service.nextStation();
-
-        int expected = 2;
-        int actual = service.getCurrentStation();
-
-        Assertions.assertEquals(expected, actual);
+    public void setStation() {
+        Radio radio = new Radio();
+        radio.setStation(5);
+        Assertions.assertEquals(5, radio.getCurrentStation());
     }
 
     @Test
-    public void shouldPrevStation0() {
-        Radio service = new Radio();
-
-        service.setStation(0);
-        service.prevStation();
-
-        int expected = 9;
-        int actual = service.getCurrentStation();
-
-        Assertions.assertEquals(expected, actual);
+    public void NegativitySetStation1() {
+        Radio radio = new Radio(8);
+        radio.setStation(10);
+        Assertions.assertEquals(0, radio.getCurrentStation());
     }
 
     @Test
-    public void shouldPrevStation1() {
-        Radio service = new Radio();
-
-        service.setStation(5);
-        service.prevStation();
-
-        int expected = 4;
-        int actual = service.getCurrentStation();
-
-        Assertions.assertEquals(expected, actual);
+    public void setStation2() {
+        Radio radio = new Radio();
+        radio.setStation(-5);
+        Assertions.assertEquals(0, radio.getCurrentStation());
     }
 
-    @Test
-    public void shouldNegativitySetVolume1() {
-        Radio service = new Radio();
 
-        service.setVolume(1000);
-
-        int expected = 0;
-        int actual = service.getVolume();
-
-        Assertions.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void shouldNegativitySetVolume2() {
-        Radio service = new Radio();
-
-        service.setVolume(-1);
-
-        int expected = 0;
-        int actual = service.getVolume();
-
-        Assertions.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void shouldNegativitySetStation1() {
-        Radio service = new Radio();
-
-        service.setStation(10);
-
-        int expected = 0;
-        int actual = service.getCurrentStation();
-
-        Assertions.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void shouldNegativitySetStation2() {
-        Radio service = new Radio();
-
-        service.setStation(-10);
-
-        int expected = 0;
-        int actual = service.getCurrentStation();
-
-        Assertions.assertEquals(expected, actual);
-    }
+//
+//    @Test
+//    public void shouldNegativitySetStation1() {
+//        Radio service = new Radio();
+//
+//        service.setStation(10);
+//
+//        int expected = 0;
+//        int actual = service.getCurrentStation();
+//
+//        Assertions.assertEquals(expected, actual);
+//    }
+//
+//    @Test
+//    public void shouldNegativitySetStation2() {
+//        Radio service = new Radio();
+//
+//        service.setStation(-10);
+//
+//        int expected = 0;
+//        int actual = service.getCurrentStation();
+//
+//        Assertions.assertEquals(expected, actual);
+//    }
 }
